@@ -1,0 +1,43 @@
+﻿@page
+@model DSA_Scalar.Pages.Recursion.SimpleRecursionModel
+@{
+    ViewData["Title"] = "Simple Recursion";
+}
+
+<h2>Enter a Number to See Recursion in Action</h2>
+
+<form method="post">
+    <label>Enter a number:</label><br />
+    <input type="number" name="InputNumber" value="@Model.InputNumber" /><br /><br />
+
+    <input type="submit" value="Submit" /><br />
+</form>
+
+<!-- Flexbox container to place both lists side by side -->
+@if (Model.RecursionResultDescending != null && Model.RecursionResultDescending.Count > 0 &&
+   Model.RecursionResultAscending != null && Model.RecursionResultAscending.Count > 0)
+{
+    <div style="display: flex; -webkit-justify-content: space-between;">
+        <!-- Decreasing Order -->
+        <div style="flex: 1; padding-right: 20px;">
+            <h3>Recursion Result in Decreasing Order:</h3>
+            <ul>
+                @foreach (var step in Model.RecursionResultDescending)
+                {
+                    <li>@step</li>
+                }
+            </ul>
+        </div>
+
+        <!-- Increasing Order -->
+        <div style="flex: 1;">
+            <h3>Recursion Result in Increasing Order:</h3>
+            <ul>
+                @foreach (var step in Model.RecursionResultAscending)
+                {
+                    <li>@step</li>
+                }
+            </ul>
+        </div>
+    </div>
+}

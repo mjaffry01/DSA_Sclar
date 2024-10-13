@@ -1,0 +1,20 @@
+﻿@page
+@model DSA_Scalar.Pages.Recursion.FibonacciModel
+
+@{
+    ViewData["Title"] = "Fibonacci";
+}
+
+<h2>Fibonacci Calculator</h2>
+
+<form method="post">
+    <label for="InputNumber">Enter a number for the Fibonacci series:</label>
+    <input type="text" id="inputNumber" name="InputNumber" value="@Model.InputNumber" />
+    <button type="submit">Submit</button>
+</form>
+
+ 
+@if (Model.result != null)
+{
+    <p>The Fibonacci number at position @Model.InputNumber is: <strong>@Model.result</strong></p>
+}

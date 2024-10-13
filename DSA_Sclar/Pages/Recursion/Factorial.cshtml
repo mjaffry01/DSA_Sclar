@@ -1,0 +1,27 @@
+﻿@page
+@model DSA_Scalar.Pages.Recursion.FactorialModel
+@{
+    ViewData["Title"] = "Factorial";
+}
+
+<h2>Factorial Calculator</h2>
+
+<p>Problem Description: Write a program to find the factorial of the given number A using recursion.</p>
+
+<p>Note: The factorial of a number N is defined as the product of the numbers from 1 to N.</p>
+
+<form method="post">
+    <label for="inputNumber">Enter a number:</label>
+    <input type="text" id="inputNumber" name="InputNumber" value="@Model.InputNumber" />
+    <button type="submit">Submit</button>
+</form>
+
+@if (Model.Result != null)
+{
+    <p>The factorial of @Model.InputNumber is: <strong>@Model.Result</strong></p>
+}
+
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <p style="color:red;">@Model.ErrorMessage</p>
+}

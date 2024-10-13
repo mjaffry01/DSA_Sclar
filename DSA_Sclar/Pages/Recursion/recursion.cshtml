@@ -1,0 +1,113 @@
+﻿@page
+@model DSA_Scalar.Pages.Recursion.recursionModel
+@{
+    ViewData["Title"] = "Recurrence Relations for Foo(x, y) and Bar(x, y)";
+}
+
+<h2>Recurrence Relations Explained</h2>
+
+<!-- Explanation for Bar(x, y) -->
+<h3>Recurrence Relation for Bar(x, y)</h3>
+
+<p>
+    The function <strong>Bar(x, y)</strong> is defined as:
+</p>
+<pre>
+Bar(x, y) = x + Bar(x, y - 1)
+</pre>
+
+<p>
+    <strong>Base Case:</strong><br />
+    When <code>y = 0</code>, the function returns <code>0</code>:
+</p>
+<pre>
+Bar(x, 0) = 0
+</pre>
+
+<p>
+    For each step, <strong>Bar(x, y)</strong> adds <code>x</code> and decrements <code>y</code>, which eventually returns the product of <code>x</code> and <code>y</code>.
+</p>
+
+<p>Here’s how <strong>Bar(x, y)</strong> works step by step:</p>
+
+<ul>
+    <li><code>Bar(x, 1) = x + Bar(x, 0) = x</code></li>
+    <li><code>Bar(x, 2) = x + Bar(x, 1) = 2x</code></li>
+    <li><code>Bar(x, 3) = x + Bar(x, 2) = 3x</code></li>
+    <li>... and so on.</li>
+</ul>
+
+<p>
+    Thus, we conclude that <strong>Bar(x, y)</strong> computes the product of <code>x</code> and <code>y</code>:
+</p>
+<pre>
+Bar(x, y) = x * y
+</pre>
+
+<hr />
+
+<!-- Explanation for Foo(x, y) -->
+<h3>Recurrence Relation for Foo(x, y)</h3>
+
+<p>
+    The function <strong>Foo(x, y)</strong> is defined as:
+</p>
+<pre>
+Foo(x, y) = Bar(x, Foo(x, y - 1))
+</pre>
+
+<p>
+    <strong>Base Case:</strong><br />
+    When <code>y = 0</code>, the function returns <code>1</code>:
+</p>
+<pre>
+Foo(x, 0) = 1
+</pre>
+
+<p>
+    For each step, <strong>Foo(x, y)</strong> calls <strong>Bar(x, ...)</strong> with the result of a smaller <strong>Foo(x, y - 1)</strong>, which eventually computes the power of <code>x</code> raised to <code>y</code>.
+</p>
+
+<p>Here’s how <strong>Foo(x, y)</strong> works step by step:</p>
+
+<ul>
+    <li><code>Foo(x, 1) = Bar(x, Foo(x, 0)) = Bar(x, 1) = x * 1 = x</code></li>
+    <li><code>Foo(x, 2) = Bar(x, Foo(x, 1)) = Bar(x, x) = x * x = x^2</code></li>
+    <li><code>Foo(x, 3) = Bar(x, Foo(x, 2)) = Bar(x, x^2) = x * x^2 = x^3</code></li>
+    <li>... and so on.</li>
+</ul>
+
+<p>
+    Thus, we conclude that <strong>Foo(x, y)</strong> computes <code>x</code> raised to the power of <code>y</code>:
+</p>
+<pre>
+Foo(x, y) = x^y
+</pre>
+
+<hr />
+
+<!-- Form to let the user input values to calculate Bar(x, y) and Foo(x, y) -->
+<h3>Enter values to calculate Foo(x, y) and Bar(x, y)</h3>
+<form method="post">
+    <label>Enter the value of <code>x</code>:</label><br />
+    <input type="number" name="InputNumber1" value="@Model.InputNumber1" /><br /><br />
+
+    <label>Enter the value of <code>y</code>:</label><br />
+    <input type="number" name="InputNumber2" value="@Model.InputNumber2" /><br /><br />
+
+    <input type="submit" value="Calculate" /><br />
+</form>
+
+@if (Model.RecursionSteps != null && Model.RecursionSteps.Count > 0)
+{
+    <h3>Steps of Recursion:</h3>
+    <ul>
+        @foreach (var step in Model.RecursionSteps)
+        {
+            <li>@step</li>
+        }
+    </ul>
+
+    <h3>Final Result:</h3>
+    <p>Foo(x, y) = @Model.RecursionResult</p>
+}
